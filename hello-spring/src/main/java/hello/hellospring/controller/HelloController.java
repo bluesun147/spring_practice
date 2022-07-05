@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller // 컨트롤러 어노테이션
 public class HelloController {
@@ -18,5 +19,32 @@ public class HelloController {
     public String helloMvc(@RequestParam("name") String name, Model model) { // param으로 name 받기, model 넘겨줌, 모델에 담으면 뷰에서 렌더링
         model.addAttribute("name", name); // 키, 값
         return "hello-template"; // templates 폴더에 hello-template.html 찾음
+    }
+
+    @GetMapping("hello-string")
+    @ResponseBody // http body에 데이터 직접 넣겠다는 뜻
+    public String helloString(@RequestParam("name") String name) {
+        return "hello " + name;
+    }
+
+    @GetMapping("hello-api")
+    @ResponseBody
+    public Hello helloApi(@RequestParam("name") String name) {
+        Hello hello = new Hello();
+        hello.setName(name);
+        return hello; // 문자 아닌 객체 넘김. json으로 반환
+    }
+
+    static class Hello{
+        private String name;
+
+        // 우클릭 - generate - getter and setter
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 }

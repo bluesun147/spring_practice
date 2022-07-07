@@ -7,7 +7,7 @@ import java.util.*;
 // MemberRepository 인터페이스에 대한 메모리 구현체
 public class MemoryMemberRepository implements MemberRepository { // alt+enter로 implement method
 
-    private static Map<Long, Member> store = new HashMap<>();
+    private  static Map<Long, Member> store = new HashMap<>();
     private static long sequence = 0L; // 키값 생성 용. 0,1,2,,
 
     @Override

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 public class MemberController {
     private final MemberService memberService; // 스프링 컨테이너에 등록하고 하나만 씀. 계속 new로 새로운 객체 만드는 것 아니라
 
+    // 생성자 주입 추천
     @Autowired // 컨트롤러 생성될 때 스프링 빈에 등록되어 있는 서비스 객체 가져다 넣어줌: DI(의존관계 주입)
     public MemberController(MemberService memberService) {
         this.memberService = memberService;

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 // 레파지토리 - 인터페이스
 // 구현체 - MemoryMemberRepository
+
 public interface MemberRepository {
     Member save(Member member); // 회원 저장 후 저장 회원 반환
     Optional<Member> findById(Long id); // id로 회원 조회

@@ -1,13 +1,13 @@
 package hello.hellospring;
 
-import hello.hellospring.repository.JdbcTemplateMemberRepository;
+import hello.hellospring.repository.JpaMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
 
 // 컴포넌트 스캔, 자동 의존관계 설정(어노테이션) 대신 직접 코드로 스프링 빈 등록
 // 실무에서는 주로 정형화된 컨트롤러, 서비스, 리포지토리 같은 코드는 컴포넌트 스캔 사용.
@@ -16,11 +16,18 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    private DataSource dataSource;
+//    private DataSource dataSource;
+//
+//    @Autowired
+//    public SpringConfig(DataSource dataSource) {
+//        this.dataSource = dataSource;
+//    }
+
+    private EntityManager em;
 
     @Autowired
-    public SpringConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public SpringConfig(EntityManager em) {
+        this.em = em;
     }
 
 
@@ -33,6 +40,7 @@ public class SpringConfig {
     public MemberRepository memberRepository() {
         //return new MemoryMemberRepository(); // MemberRepository는 인터페이스. 인터페이스는 new가 안됨
         //return new JdbcMemberRepository(dataSource);
-        return new JdbcTemplateMemberRepository(dataSource);
+        //return new JdbcTemplateMemberRepository(dataSource);
+        return new JpaMemberRepository(em);
     }
 }

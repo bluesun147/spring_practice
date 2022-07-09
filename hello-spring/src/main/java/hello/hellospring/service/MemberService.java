@@ -2,11 +2,16 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+// jpa 사용 시 주의할 점: 항상 transaction 있어야 함.
+// 데이터 저장, 변경할 때 항상 transaction 있어야 함.
+
 //@Service
+@Transactional
 public class MemberService { // ctrl+shift+t 테스트 자동 생성
     // private final MemberRepository memberRepository = new MemoryMemberRepository(); // final은 수정 불가
     private final MemberRepository memberRepository;
